@@ -1,0 +1,62 @@
+<h2>Lista de Veículos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Renavam</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Cor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($veiculos as $veiculo) : ?>
+            <tr>
+                <td><?= $veiculo->getPlaca(); ?></td>
+                <td><?= $veiculo->getRenavam(); ?></td>
+                <td><?= $veiculo->getModelo(); ?></td>
+                <td><?= $veiculo->getMarca(); ?></td>
+                <td><?= $veiculo->getAno(); ?></td>
+                <td><?= $veiculo->getCor(); ?></td>
+                <td>
+                    <a href="<?= $this->url('veiculo/edit', ['id' => $veiculo->getId()]); ?>">Editar</a>
+                    <a href="<?= $this->url('veiculo/delete', ['id' => $veiculo->getId()]); ?>">Remover</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<h2>Lista de Motoristas</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>RG</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Veículo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($motoristas as $motorista) : ?>
+            <tr>
+                <td><?= $motorista->getNome(); ?></td>
+                <td><?= $motorista->getRg(); ?></td>
+                <td><?= $motorista->getCpf(); ?></td>
+                <td><?= $motorista->getTelefone(); ?></td>
+                <td><?= $motorista->getVeiculo()->getModelo(); ?></td>
+                <td>
+                    <a href="<?= $this->url('motorista/edit', ['id' => $motorista->getId()]); ?>">Editar</a>
+                    <a href="<?= $this->url('motorista/delete', ['id' => $motorista->getId()]); ?>">Remover</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
