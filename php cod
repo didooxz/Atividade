@@ -1,0 +1,177 @@
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="veiculos")
+ */
+class Veiculo
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    protected $placa;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    protected $renavam;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $modelo;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $marca;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $ano;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $cor;
+
+    // Getters e Setters
+}
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Application\Entity\Veiculo;
+
+class VeiculoController extends AbstractActionController
+{
+    protected $entityManager;
+
+    public function __construct($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function indexAction()
+    {
+        $veiculos = $this->entityManager->getRepository(Veiculo::class)->findAll();
+
+        return new ViewModel([
+            'veiculos' => $veiculos,
+        ]);
+    }
+
+    public function createAction()
+    {
+        // Lógica para criação de veículo
+    }
+
+    public function editAction()
+    {
+        // Lógica para edição de veículo
+    }
+
+    public function deleteAction()
+    {
+        // Lógica para remoção de veículo
+    }
+}
+
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="motoristas")
+ */
+class Motorista
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    protected $nome;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $rg;
+
+    /**
+     * @ORM\Column(type="string", length=11)
+     */
+    protected $cpf;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    protected $telefone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Veiculo")
+     * @ORM\JoinColumn(name="veiculo_id", referencedColumnName="id")
+     */
+    protected $veiculo;
+
+    // Getters e Setters
+}
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Application\Entity\Motorista;
+
+class MotoristaController extends AbstractActionController
+{
+    protected $entityManager;
+
+    public function __construct($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function indexAction()
+    {
+        $motoristas = $this->entityManager->getRepository(Motorista::class)->findAll();
+
+        return new ViewModel([
+            'motoristas' => $motoristas,
+        ]);
+    }
+
+    public function createAction()
+    {
+        // Lógica para criação de motorista
+    }
+
+    public function editAction()
+    {
+        // Lógica para edição de motorista
+    }
+
+    public function deleteAction()
+    {
+        // Lógica para remoção de motorista
+    }
+}
+
